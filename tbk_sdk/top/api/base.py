@@ -51,12 +51,13 @@ def sign(secret, parameters):
     # 如果parameters 是字典类的话
     if hasattr(parameters, "items"):
         keys = parameters.keys()
-        keys.sort()
+        # keys.sort()
+        sorted(keys)
         
         parameters = "%s%s%s" % (secret,
             str().join('%s%s' % (key, parameters[key]) for key in keys),
             secret)
-    sign = hashlib.md5(parameters).hexdigest().upper()
+    sign = hashlib.md5(parameters.encode()).hexdigest().upper()
     return sign
 
 def mixStr(pstr):
@@ -223,7 +224,7 @@ class RestApi(object):
             P_APPKEY: self.__app_key,
             P_SIGN_METHOD: "md5",
             P_VERSION: '2.0',
-            P_TIMESTAMP: str(long(time.time() * 1000)),
+            P_TIMESTAMP: str(int(time.time() * 1000)),
             P_PARTNER_ID: SYSTEM_GENERATE_VERSION,
             P_API: self.getapiname(),
         }
@@ -234,24 +235,26 @@ class RestApi(object):
         sign_parameter.update(application_parameter)
         sys_parameters[P_SIGN] = sign(self.__secret, sign_parameter)
         connection.connect()
-        
-        header = self.get_request_header();
+
+        from urllib.parse import urlencode
+
+        header = self.get_request_header()
         if(self.getMultipartParas()):
             form = MultiPartForm()
             for key, value in application_parameter.items():
                 form.add_field(key, value)
             for key in self.getMultipartParas():
                 fileitem = getattr(self,key)
-                if(fileitem and isinstance(fileitem,FileItem)):
+                if fileitem and isinstance(fileitem,FileItem):
                     form.add_file(key,fileitem.filename,fileitem.content)
             body = str(form)
             header['Content-type'] = form.get_content_type()
         else:
-            body = urllib.urlencode(application_parameter)
+            body = urlencode(application_parameter)
             
-        url = N_REST + "?" + urllib.urlencode(sys_parameters)
+        url = N_REST + "?" + urlencode(sys_parameters)
         connection.request(self.__httpmethod, url, body=body, headers=header)
-        response = connection.getresponse();
+        response = connection.getresponse()
         if response.status is not 200:
             raise RequestException('invalid http status ' + str(response.status) + ',detail body:' + response.read())
         result = response.read()
@@ -274,15 +277,16 @@ class RestApi(object):
     
     def getApplicationParameters(self):
         application_parameter = {}
-        for key, value in self.__dict__.iteritems():
+        for key, value in self.__dict__.items():
             if not key.startswith("__") and not key in self.getMultipartParas() and not key.startswith("_RestApi__") and value is not None :
                 if(key.startswith("_")):
                     application_parameter[key[1:]] = value
                 else:
                     application_parameter[key] = value
+
         #查询翻译字典来规避一些关键字属性
         translate_parameter = self.getTranslateParas()
-        for key, value in application_parameter.iteritems():
+        for key, value in application_parameter.items():
             if key in translate_parameter:
                 application_parameter[translate_parameter[key]] = application_parameter[key]
                 del application_parameter[key]

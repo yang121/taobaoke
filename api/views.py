@@ -1,14 +1,12 @@
 from django.shortcuts import render, HttpResponse, render_to_response
-from api.tbk import top
-from api.tbk.top import api
-from api.tbk.top.api import *
+from tbk_sdk import top
+from tbk_sdk.top import api
+from tbk_sdk.top.api import *
 from taobaoke.settings import *
 
 # Create your views here.
 def get_item(request):
-    from api.tbk.top import api as tbk_api
-
-    req = tbk_api.TbkItemGetRequest(tbk_url)
+    req = top.api.rest.TbkItemGetRequest(tbk_url)
     req.set_app_info(top.appinfo(APPKEY, SECRET))
 
     req.fields = "num_iid,title,pict_url,small_images,reserve_price,zk_final_price,user_type,provcity,item_url,seller_id,volume,nick"
@@ -25,11 +23,11 @@ def get_item(request):
     req.platform = 1
     req.page_no = 1
     req.page_size = 1
-    try:
-        resp = req.getResponse()
-        print(resp)
-    except Exception as e:
-        print(e)
-        resp = 'error'
+    # try:
+    resp = req.getResponse()
+    print(resp)
+    # except Exception as e:
+    #     print(e.args)
+    #     resp = 'error'
 
     return render(request, 'items.html', resp)
