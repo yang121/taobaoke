@@ -120,3 +120,16 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+
+if DEBUG:
+    tbk_url = 'http://gw.api.tbsandbox.com/router/rest'
+else:
+    tbk_url = 'http://gw.api.taobao.com/router/rest'
+
+APPKEY = '25316098'
+
+SECRET = '02dc841f3c396688a89e940d37df227f'
