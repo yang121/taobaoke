@@ -13,4 +13,4 @@ class TbkJuTqgGetRequest(RestApi):
 		self.start_time = None
 
 	def getapiname(self):
-		return 'taobao.tbk_sdk.ju.tqg.get'
+		return 'taobao.tbk.ju.tqg.get'

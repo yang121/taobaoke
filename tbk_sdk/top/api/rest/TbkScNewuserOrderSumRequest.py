@@ -13,4 +13,4 @@ class TbkScNewuserOrderSumRequest(RestApi):
 		self.site_id = None
 
 	def getapiname(self):
-		return 'taobao.tbk_sdk.sc.newuser.order.sum'
+		return 'taobao.tbk.sc.newuser.order.sum'

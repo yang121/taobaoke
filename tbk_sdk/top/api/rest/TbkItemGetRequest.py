@@ -3,8 +3,8 @@ Created by auto_sdk on 2018.07.25
 '''
 from ..base import RestApi
 class TbkItemGetRequest(RestApi):
-	def __init__(self,domain='gw.api.taobao.com',port=80):
-		RestApi.__init__(self,domain, port)
+	def __init__(self, domain='gw.api.taobao.com', port=80):
+		RestApi.__init__(self, domain, port)
 		self.cat = None
 		self.end_price = None
 		self.end_tk_rate = None
@@ -21,4 +21,4 @@ class TbkItemGetRequest(RestApi):
 		self.start_tk_rate = None
 
 	def getapiname(self):
-		return 'taobao.tbk_sdk.item.get'
+		return 'taobao.tbk.item.get'

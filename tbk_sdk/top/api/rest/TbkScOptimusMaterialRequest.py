@@ -17,4 +17,4 @@ class TbkScOptimusMaterialRequest(RestApi):
 		self.site_id = None
 
 	def getapiname(self):
-		return 'taobao.tbk_sdk.sc.optimus.material'
+		return 'taobao.tbk.sc.optimus.material'

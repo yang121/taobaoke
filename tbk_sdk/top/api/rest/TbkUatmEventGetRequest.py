@@ -10,4 +10,4 @@ class TbkUatmEventGetRequest(RestApi):
 		self.page_size = None
 
 	def getapiname(self):
-		return 'taobao.tbk_sdk.uatm.event.get'
+		return 'taobao.tbk.uatm.event.get'

@@ -13,4 +13,4 @@ class TbkDgItemCouponGetRequest(RestApi):
 		self.q = None
 
 	def getapiname(self):
-		return 'taobao.tbk_sdk.dg.item.coupon.get'
+		return 'taobao.tbk.dg.item.coupon.get'

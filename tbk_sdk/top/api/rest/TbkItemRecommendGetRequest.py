@@ -11,4 +11,4 @@ class TbkItemRecommendGetRequest(RestApi):
 		self.platform = None
 
 	def getapiname(self):
-		return 'taobao.tbk_sdk.item.recommend.get'
+		return 'taobao.tbk.item.recommend.get'

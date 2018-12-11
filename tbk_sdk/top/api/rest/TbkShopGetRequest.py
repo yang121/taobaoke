@@ -22,4 +22,4 @@ class TbkShopGetRequest(RestApi):
 		self.start_total_action = None
 
 	def getapiname(self):
-		return 'taobao.tbk_sdk.shop.get'
+		return 'taobao.tbk.shop.get'

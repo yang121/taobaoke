@@ -14,4 +14,4 @@ class TbkUatmEventItemGetRequest(RestApi):
 		self.unid = None
 
 	def getapiname(self):
-		return 'taobao.tbk_sdk.uatm.event.item.get'
+		return 'taobao.tbk.uatm.event.item.get'

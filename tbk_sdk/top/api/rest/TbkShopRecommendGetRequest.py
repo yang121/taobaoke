@@ -11,4 +11,4 @@ class TbkShopRecommendGetRequest(RestApi):
 		self.user_id = None
 
 	def getapiname(self):
-		return 'taobao.tbk_sdk.shop.recommend.get'
+		return 'taobao.tbk.shop.recommend.get'

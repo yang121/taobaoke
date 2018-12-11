@@ -13,4 +13,4 @@ class TbkDgNewuserOrderGetRequest(RestApi):
 		self.start_time = None
 
 	def getapiname(self):
-		return 'taobao.tbk_sdk.dg.newuser.order.get'
+		return 'taobao.tbk.dg.newuser.order.get'

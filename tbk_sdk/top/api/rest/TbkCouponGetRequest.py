@@ -10,4 +10,4 @@ class TbkCouponGetRequest(RestApi):
 		self.me = None
 
 	def getapiname(self):
-		return 'taobao.tbk_sdk.coupon.get'
+		return 'taobao.tbk.coupon.get'

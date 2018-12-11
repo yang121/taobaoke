@@ -11,4 +11,4 @@ class TbkUatmFavoritesGetRequest(RestApi):
 		self.type = None
 
 	def getapiname(self):
-		return 'taobao.tbk_sdk.uatm.favorites.get'
+		return 'taobao.tbk.uatm.favorites.get'

@@ -126,9 +126,11 @@ STATICFILES_DIRS = (
 )
 
 if DEBUG:
-    tbk_url = 'http://gw.api.tbsandbox.com/router/rest'
+    # TBK_URL = 'gw.api.tbsandbox.com/router/rest'
+    # TBK_URL = 'gw.api.tbsandbox.com'
+    TBK_URL = 'gw.api.taobao.com'
 else:
-    tbk_url = 'http://gw.api.taobao.com/router/rest'
+    TBK_URL = 'gw.api.taobao.com/router/rest'
 
 APPKEY = '25316098'
 

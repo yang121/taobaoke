@@ -16,4 +16,4 @@ class TbkDgOptimusMaterialRequest(RestApi):
 		self.page_size = None
 
 	def getapiname(self):
-		return 'taobao.tbk_sdk.dg.optimus.material'
+		return 'taobao.tbk.dg.optimus.material'

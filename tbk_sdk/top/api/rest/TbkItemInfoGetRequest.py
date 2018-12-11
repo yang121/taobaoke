@@ -10,4 +10,4 @@ class TbkItemInfoGetRequest(RestApi):
 		self.platform = None
 
 	def getapiname(self):
-		return 'taobao.tbk_sdk.item.info.get'
+		return 'taobao.tbk.item.info.get'

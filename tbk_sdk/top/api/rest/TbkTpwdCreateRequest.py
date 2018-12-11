@@ -12,4 +12,4 @@ class TbkTpwdCreateRequest(RestApi):
 		self.user_id = None
 
 	def getapiname(self):
-		return 'taobao.tbk_sdk.tpwd.create'
+		return 'taobao.tbk.tpwd.create'

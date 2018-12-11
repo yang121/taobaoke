@@ -36,4 +36,4 @@ class TbkDgMaterialOptionalRequest(RestApi):
 		self.start_tk_rate = None
 
 	def getapiname(self):
-		return 'taobao.tbk_sdk.dg.material.optional'
+		return 'taobao.tbk.dg.material.optional'

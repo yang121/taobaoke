@@ -49,22 +49,26 @@ def sign(secret, parameters):
     # '''
     #===========================================================================
     # 如果parameters 是字典类的话
-    if hasattr(parameters, "items"):
+    if isinstance(parameters, dict):
         keys = parameters.keys()
+        print(keys)
         # keys.sort()
+        keys = [i for i in keys]
         sorted(keys)
+        print(type(keys), keys)
         
         parameters = "%s%s%s" % (secret,
             str().join('%s%s' % (key, parameters[key]) for key in keys),
             secret)
-    sign = hashlib.md5(parameters.encode()).hexdigest().upper()
+        print('parameters', parameters)
+    sign = hashlib.md5(parameters.encode('utf-8')).hexdigest().upper()
     return sign
 
 def mixStr(pstr):
-    if(isinstance(pstr, str)):
+    if isinstance(pstr, bytes):
+        return pstr.decode('utf-8')
+    elif isinstance(pstr, str):
         return pstr
-    # elif(isinstance(pstr, unicode)):
-    #     return pstr.encode('utf-8')
     else:
         return str(pstr)
     
@@ -182,7 +186,7 @@ class RestApi(object):
         if(top.getDefaultAppInfo()):
             self.__app_key = top.getDefaultAppInfo().appkey
             self.__secret = top.getDefaultAppInfo().secret
-        
+
     def get_request_header(self):
         return {
                  'Content-type': 'application/x-www-form-urlencoded;charset=UTF-8',
@@ -198,7 +202,7 @@ class RestApi(object):
         #=======================================================================
         self.__app_key = appinfo.appkey
         self.__secret = appinfo.secret
-        
+
     def getapiname(self):
         return ""
     
@@ -216,9 +220,9 @@ class RestApi(object):
         # 获取response结果
         #=======================================================================
         if(self.__port == 443):
-            connection = httplib.HTTPSConnection(self.__domain, self.__port, None, None, False, timeout)
+            connection = httplib.HTTPSConnection(self.__domain, self.__port, None, None, timeout)
         else:
-            connection = httplib.HTTPConnection(self.__domain, self.__port, False, timeout)
+            connection = httplib.HTTPConnection(self.__domain, self.__port, timeout, None)
         sys_parameters = {
             P_FORMAT: 'json',
             P_APPKEY: self.__app_key,
@@ -259,21 +263,21 @@ class RestApi(object):
             raise RequestException('invalid http status ' + str(response.status) + ',detail body:' + response.read())
         result = response.read()
         jsonobj = json.loads(result)
-        if jsonobj.has_key("error_response"):
+        print(jsonobj)
+        if "error_response" in jsonobj:
             error = TopException()
-            if jsonobj["error_response"].has_key(P_CODE) :
+            if P_CODE in jsonobj["error_response"]:
                 error.errorcode = jsonobj["error_response"][P_CODE]
-            if jsonobj["error_response"].has_key(P_MSG) :
+            if P_MSG in jsonobj["error_response"]:
                 error.message = jsonobj["error_response"][P_MSG]
-            if jsonobj["error_response"].has_key(P_SUB_CODE) :
+            if P_SUB_CODE in jsonobj["error_response"]:
                 error.subcode = jsonobj["error_response"][P_SUB_CODE]
-            if jsonobj["error_response"].has_key(P_SUB_MSG) :
+            if P_SUB_MSG in jsonobj["error_response"]:
                 error.submsg = jsonobj["error_response"][P_SUB_MSG]
             error.application_host = response.getheader("Application-Host", "")
             error.service_host = response.getheader("Location-Host", "")
             raise error
         return jsonobj
-    
     
     def getApplicationParameters(self):
         application_parameter = {}

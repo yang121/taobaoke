@@ -14,4 +14,4 @@ class TbkUatmFavoritesItemGetRequest(RestApi):
 		self.unid = None
 
 	def getapiname(self):
-		return 'taobao.tbk_sdk.uatm.favorites.item.get'
+		return 'taobao.tbk.uatm.favorites.item.get'
