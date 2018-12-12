@@ -5,7 +5,28 @@
     <title>item</title>
 </head>
 <body>
-helloworld!
-{{ tbk_item_get_response.results }}
+{% for item in tbk_item_get_response.results.n_tbk_item %}
+    <p><b>item_url:</b></p>
+    <a href="{{ item.item_url }}">{{ item.item_url }}</a>
+    <p><b>nick:</b>{{ item.nick }}</p>
+    <p><b>num_iid:</b>{{ item.num_iid }}</p>
+    <p><b>pict_url</b>:</p>
+    <a href="{{ item.pict_url }}"><img style="height: 400px; width: 400px" src="{{ item.pict_url }}"></a>
+    <p><b>provcity:</b>{{ item.provcity }}</p>
+    <p><b>reserve_price:</b>{{ item.reserve_price }}</p>
+    <p><b>seller_id:</b>{{ item.seller_id }}</p>
+    <p><b>small_images:</b></p>
+    {% for img_link in  item.small_images.string %}
+        <a href="{{ img_link }}"><img style="height: 300px; width: 300px" src="{{ img_link }}"></a>
+    {% endfor %}
+    <p><b>title:</b>{{ item.title }}</p>
+    <p><b>user_type:</b>{{ item.user_type }}</p>
+    <p><b>volume:</b>{{ item.volume }}</p>
+    <p><b>zk_final_price:</b>{{ item.zk_final_price }}</p>
+
+{% endfor %}
+<p>total_results:{{ tbk_item_get_response.total_results }}</p>
+<p>request_id:{{ tbk_item_get_response.request_id }}</p>
+
 </body>
 </html>

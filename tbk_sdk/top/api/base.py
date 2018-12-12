@@ -54,12 +54,14 @@ def sign(secret, parameters):
         print(keys)
         # keys.sort()
         keys = [i for i in keys]
-        sorted(keys)
+        keys.sort()
         print(type(keys), keys)
         
-        parameters = "%s%s%s" % (secret,
+        parameters = "%s%s%s" % (
+            secret,
             str().join('%s%s' % (key, parameters[key]) for key in keys),
-            secret)
+            secret
+        )
         print('parameters', parameters)
     sign = hashlib.md5(parameters.encode('utf-8')).hexdigest().upper()
     return sign
