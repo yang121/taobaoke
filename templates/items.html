@@ -5,28 +5,54 @@
     <title>item</title>
 </head>
 <body>
+<p>共{{ tbk_item_get_response.total_results }}条结果</p>
+<table>
+    <tr>
+        <th>主图链接:</th>
+        <th>商品信息:</th>
+        <th>卖家信息:</th>
+        <th>小图列表:</th>
+    </tr>
 {% for item in tbk_item_get_response.results.n_tbk_item %}
-    <p><b>item_url:</b></p>
-    <a href="{{ item.item_url }}">{{ item.item_url }}</a>
-    <p><b>nick:</b>{{ item.nick }}</p>
-    <p><b>num_iid:</b>{{ item.num_iid }}</p>
-    <p><b>pict_url</b>:</p>
-    <a href="{{ item.pict_url }}"><img style="height: 400px; width: 400px" src="{{ item.pict_url }}"></a>
-    <p><b>provcity:</b>{{ item.provcity }}</p>
-    <p><b>reserve_price:</b>{{ item.reserve_price }}</p>
-    <p><b>seller_id:</b>{{ item.seller_id }}</p>
-    <p><b>small_images:</b></p>
-    {% for img_link in  item.small_images.string %}
-        <a href="{{ img_link }}"><img style="height: 300px; width: 300px" src="{{ img_link }}"></a>
-    {% endfor %}
-    <p><b>title:</b>{{ item.title }}</p>
-    <p><b>user_type:</b>{{ item.user_type }}</p>
-    <p><b>volume:</b>{{ item.volume }}</p>
-    <p><b>zk_final_price:</b>{{ item.zk_final_price }}</p>
+    <tr>
+        <td><a href="{{ item.pict_url }}"><img style="height: 250px; width: 250px" src="{{ item.pict_url }}"></a></td>
+        <td>
+            商品标题：<br>
+            {{ item.title }}<br>
+            一口价：{{ item.reserve_price }}<br>
+            折扣价：{{ item.zk_final_price }}<br>
+            商品地址：<a href="{{ item.item_url }}">{{ item.item_url }}</a><br>
+            30天销量：{{ item.volume }}<br>
+            所在地：{{ item.provcity }}
+            商品ID：{{ item.num_iid }}<br>
+        </td>
+        <td>卖家名称：<br>
+            {{ item.nick }}<br>
+            卖家ID：{{ item.seller_id }}<br>
+            卖家类型：
+            {% if item.user_type == 1 %}
+                天猫
+            {% else %}
+                淘宝
+            {% endif %}
+            <br>
+
+
+        </td>
+        <td>
+            {% for img_link in  item.small_images.string %}
+                <a href="{{ img_link }}"><img style="height: 200px; width: 200px" src="{{ img_link }}"></a>
+            {% endfor %}
+        </td>
+    </tr>
 
 {% endfor %}
-<p>total_results:{{ tbk_item_get_response.total_results }}</p>
-<p>request_id:{{ tbk_item_get_response.request_id }}</p>
+</table>
 
 </body>
+<style>
+    table,th,td {
+        border: darkgray solid 0.1em;
+    }
+</style>
 </html>

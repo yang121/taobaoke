@@ -51,18 +51,15 @@ def sign(secret, parameters):
     # 如果parameters 是字典类的话
     if isinstance(parameters, dict):
         keys = parameters.keys()
-        print(keys)
         # keys.sort()
         keys = [i for i in keys]
         keys.sort()
-        print(type(keys), keys)
-        
+
         parameters = "%s%s%s" % (
             secret,
             str().join('%s%s' % (key, parameters[key]) for key in keys),
             secret
         )
-        print('parameters', parameters)
     sign = hashlib.md5(parameters.encode('utf-8')).hexdigest().upper()
     return sign
 
@@ -265,7 +262,6 @@ class RestApi(object):
             raise RequestException('invalid http status ' + str(response.status) + ',detail body:' + response.read())
         result = response.read()
         jsonobj = json.loads(result)
-        print(jsonobj)
         if "error_response" in jsonobj:
             error = TopException()
             if P_CODE in jsonobj["error_response"]:

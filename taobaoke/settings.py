@@ -125,13 +125,12 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
 
-if DEBUG:
-    # TBK_URL = 'gw.api.tbsandbox.com/router/rest'
-    # TBK_URL = 'gw.api.tbsandbox.com'
-    TBK_URL = 'gw.api.taobao.com'
-else:
-    TBK_URL = 'gw.api.taobao.com/router/rest'
+
+TBK_URL = 'gw.api.taobao.com'
 
 APPKEY = '25316098'
 
 SECRET = '02dc841f3c396688a89e940d37df227f'
+
+# PID = 'mm_54487695_238750188_74817850005'
+PID = '238750188'

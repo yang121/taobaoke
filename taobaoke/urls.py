@@ -18,7 +18,8 @@ from django.urls import path, include
 from django.shortcuts import render
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('', lambda request: render(request, 'index.html')),
     path('api/', include('api.urls')),
-    path('root.txt/', lambda request: render(request, 'root.txt'))
+    path('root.txt/', lambda request: render(request, 'root.txt')),
+    path('admin/', admin.site.urls),
 ]
